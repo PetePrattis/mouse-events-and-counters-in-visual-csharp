@@ -22,17 +22,17 @@ namespace WindowsFormsApplication3
             MinimizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedSingle;
 
-            this.Controls.OfType<Button>().ToList().ForEach(button =>// για όλα τα κουμπιά:
+            this.Controls.OfType<Button>().ToList().ForEach(button =>// for all buttons
             {
                 button1.Tag = new Stopwatch();//δημιουργεί stopwatch κλάση
-                button1.MouseDown += new MouseEventHandler(button1_MouseDown);//η οποία λειτουργεί μαζι με τις 2 event κλάσεις
-                button1.MouseUp += new MouseEventHandler(button1_MouseUp);// mousedown και mouseup για το κάθε κουμπί
+                button1.MouseDown += new MouseEventHandler(button1_MouseDown);//it works together with the two event classes
+                button1.MouseUp += new MouseEventHandler(button1_MouseUp);// mousedown and mouseup for every button
                 button2.Tag = new Stopwatch();
                 button2.MouseDown += new MouseEventHandler(button2_MouseDown);
                 button2.MouseUp += new MouseEventHandler(button2_MouseUp);
             });
 
-            result =//το κείμενο που εμφανίζεται στο richtextbox
+            result =//the text for the richtextbox
                 "-The button 'coordinates' times clicked: " + button1events[0].ToString() + Environment.NewLine
                 + "-The button 'coordinates' time clicked: " + (button1events[1] / 1000).ToString() + " sec" + Environment.NewLine
                 + "-The button 'coordinates' mouse enter:" + button1events[2].ToString() + Environment.NewLine
@@ -66,12 +66,12 @@ namespace WindowsFormsApplication3
             richTextBox1.Text = result;
         }
 
-        private Random rnd = new Random();//για το χρώμα random κλάση
-        bool a;//για το κουμπί coordinate
+        private Random rnd = new Random();//forthe color I use random class
+        bool a;//for the button coordinate
         string result;
         string c;
         
-        //για κάθε ένα αντικείμενο της φόρμας δημιουργώ array με τα events 
+        //for every element of the form I create an array with the events 
         double[] button1events = new double[4] {0, 0, 0, 0};
         double[] button2events = new double[4] { 0, 0, 0, 0};
         double[] textboxevents = new double[4] { 0, 0, 0, 0};
@@ -84,9 +84,9 @@ namespace WindowsFormsApplication3
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (a)//αν έχει πατηθεί το κουμπί coordinates 
+            if (a)//if button coordinates is clicked 
             {
-                //στις ετικέτες θα εμφανίζονται οι συντεταγμένες του κέρσορα
+                //in the lables I will show the cursor's coordinates
                 label1.Text = e.X.ToString();
                 label2.Text = e.Y.ToString();
             }
@@ -94,24 +94,24 @@ namespace WindowsFormsApplication3
         
 //-------------Button1 Events---------------
 
-        private void button1_MouseClick(object sender, MouseEventArgs e)//Κουμπί για τις συντεταγμένες του κέρσορα
+        private void button1_MouseClick(object sender, MouseEventArgs e)//button for cursor's coordinates
         {
             a = !a;
             button1events[0] += 1;
 
         }
 
-        private void button1_MouseDown(object sender, MouseEventArgs e)//μόλις πατηθεί το κουμπί
+        private void button1_MouseDown(object sender, MouseEventArgs e)//once button is clicked
         {
-            ((sender as Button).Tag as Stopwatch).Start();//ξεκινάει η χρονομέτρηση
+            ((sender as Button).Tag as Stopwatch).Start();//start time counter
         }
 
-        private void button1_MouseUp(object sender, MouseEventArgs e)//όταν σταματήσει να πατάει το κουμπί
+        private void button1_MouseUp(object sender, MouseEventArgs e)//once button clicked is stopped
         {
-            Stopwatch watch = ((sender as Button).Tag as Stopwatch);//σταματάει η χρονομέτρηση
-            watch.Stop();//το αποτέλεσμα είναι σε milliseconds
-            button1events[1] += watch.Elapsed.TotalMilliseconds;//προσθέτω τους χρόνους
-            watch.Reset();//επαναφορά της χρονομέτρησης σε 0
+            Stopwatch watch = ((sender as Button).Tag as Stopwatch);//stop time counter
+            watch.Stop();//result in milliseconds
+            button1events[1] += watch.Elapsed.TotalMilliseconds;//add times
+            watch.Reset();//reset timer to zero
 
         }
        
@@ -135,13 +135,13 @@ namespace WindowsFormsApplication3
         {
             if (!radioButton1.Checked)
             {
-                radio1events[0] += 1;//συνολικά πόσες φορές άλλαξα επιλογή
+                radio1events[0] += 1;//σhow many times I changed option
 
             }
         }
         private void radioButton1_Click(object sender, EventArgs e)
         {
-            radio1events[1] += 1;//πόσες φορές πάτησα την 1η επιλογή
+            radio1events[1] += 1;//how many time I clicked 1st option
             c = "Option1";
         }
         private void radioButton1_MouseEnter(object sender, EventArgs e)
@@ -159,14 +159,14 @@ namespace WindowsFormsApplication3
         //-----2nd Radio Button
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            if (!radioButton2.Checked)//συνολικά πόσες φορές άλλαξα επιλογή
-                radio1events[0] += 1;//στο τέλος προσθέτω τα radio1events[0] και radio2events[0]
-                                     //για να δω πόσες φορές συνολικά άλλαξα επιλογή 
+            if (!radioButton2.Checked)
+                radio1events[0] += 1;//at the end I add radio1events[0] and radio2events[0]
+                                     //to see how many times I changed option between the two radio buttons
 
         }
         private void radioButton2_Click(object sender, EventArgs e)
         {
-            radio2events[1] += 1;//πόσες φορές πάτησα την 2η επιλογή
+            radio2events[1] += 1;
             c = "Option 2";
         }
         private void radioButton2_MouseEnter(object sender, EventArgs e)
@@ -273,15 +273,15 @@ namespace WindowsFormsApplication3
         }
         private void button2_MouseUp(object sender, MouseEventArgs e)
         {
-            Stopwatch watch = ((sender as Button).Tag as Stopwatch);//σταματάει η χρονομέτρηση
-            watch.Stop();//το αποτέλεσμα είναι σε milliseconds
-            button2events[1] += watch.Elapsed.TotalMilliseconds;//προσθέτω τους χρόνους
-            watch.Reset();//επαναφορά της χρονομέτρησης σε 0
+            Stopwatch watch = ((sender as Button).Tag as Stopwatch);
+            watch.Stop();
+            button2events[1] += watch.Elapsed.TotalMilliseconds;
+            watch.Reset();
   
         }
         private void button2_MouseDown(object sender, MouseEventArgs e)
         {
-            ((sender as Button).Tag as Stopwatch).Start();//ξεκινάει η χρονομέτρηση
+            ((sender as Button).Tag as Stopwatch).Start();
         }
 
         private void button2_MouseEnter(object sender, EventArgs e)
@@ -314,12 +314,12 @@ namespace WindowsFormsApplication3
 
 //------------Label 6 Events-------------
         private void label6_Click(object sender, EventArgs e)
-        //στο label6 εμφανίζω κάποια στοιχεία της φόρμας
+        //at label6 some form information
         {
             string x, y, t;
 
             labelevents[0] += 1;
-            if (label1.Text == "X")//αν δεν έχει πατηθεί το κουμπί coordinates
+            if (label1.Text == "X")
             {
                 x = "X";
                 y = "Y";
@@ -361,9 +361,8 @@ namespace WindowsFormsApplication3
         }
 //------------------------------------
 
-        //στο πάτημα του result button μετά το reset η φόρμα έχει αλλάξει το χρώμα της
-        //άρα για το πάτημα του κουμπιου θα αφαιρώ μια επανάληψη αυτού του event
-        //αρχικοποιώ μια μεταβλητή για αυτόν τον σκοπό
+        //when result button is clicked after reset the form has changedits color
+        //so I remove this event when clicking this button
         bool fresult = true;
 
         private void button3_Click(object sender, EventArgs e)//reset button
