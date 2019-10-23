@@ -8,7 +8,7 @@ and is one of a few C# programms neccessary to pass the class_
 
 > #### Description of project
 >
->>A windows form application implementing basic layout elements and keeping track of mouse click, hover, enter, button clicked and other events and showing them to the user.
+>>A windows forms application implementing basic layout elements and keeping track of mouse click, hover, enter, button clicked and other events and showing them to the user.
 
 > #### About this project
 >
